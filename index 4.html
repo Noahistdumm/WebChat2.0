@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WebChat</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="container">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-top">
+      <h2>WebChat</h2>
+      <button id="sidebarCloseBtn" class="icon-btn only-mobile" title="Menü schließen">✕</button>
+    </div>
+
+    <!-- AUTH -->
+    <div id="authArea" class="auth-area">
+      <div class="auth-tabs">
+        <button id="tabLogin" class="auth-tab active" type="button">Anmelden</button>
+        <button id="tabSignup" class="auth-tab" type="button">Registrieren</button>
+      </div>
+      <form id="authForm" autocomplete="on">
+        <input id="email" type="email" placeholder="E-Mail" autocomplete="email" required>
+        <input id="password" type="password" placeholder="Passwort" autocomplete="current-password" required>
+        <button id="authSubmitBtn" type="submit">Anmelden</button>
+        <p id="authError" class="auth-error"></p>
+      </form>
+    </div>
+
+    <!-- USER -->
+    <div id="userArea" class="user-area" style="display:none">
+      <div class="user-card">
+        <div class="avatar" id="userAvatar"></div>
+        <div class="user-card-info">
+          <div id="userInfo" class="user-name"></div>
+          <button id="profileBtn" class="link-btn">Profil anzeigen</button>
+        </div>
+        <button id="logoutBtn" class="icon-btn" title="Abmelden">⎋</button>
+      </div>
+
+      <div class="sidebar-section">
+        <h4>Kontakte</h4>
+        <div id="contacts" class="list"></div>
+      </div>
+
+      <div class="sidebar-section">
+        <h4>Gruppen</h4>
+        <div id="groups" class="list"></div>
+        <form id="groupForm" class="inline-form">
+          <input id="newGroupName" placeholder="Neue Gruppe…" required>
+          <button type="submit">+</button>
+        </form>
+      </div>
+    </div>
+  </aside>
+
+  <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+  <!-- MAIN -->
+  <main class="main">
+    <div class="chat-header">
+      <button id="sidebarOpenBtn" class="icon-btn only-mobile" title="Menü öffnen">☰</button>
+      <h3 id="chatTitle">Bitte anmelden</h3>
+      <div id="callButtons" class="call-buttons" style="display:none">
+        <button id="audioCallBtn" class="icon-btn" title="Audioanruf">📞</button>
+        <button id="videoCallBtn" class="icon-btn" title="Videoanruf">🎥</button>
+        <button id="endCallBtn" class="icon-btn danger" title="Anruf beenden" style="display:none">⏹</button>
+      </div>
+    </div>
+
+    <div id="videoGrid" class="video-grid"></div>
+
+    <div id="chatBox" class="chat-box">
+      <p class="empty-hint" id="emptyHint">Wähle links einen Kontakt oder eine Gruppe aus, um zu chatten.</p>
+    </div>
+
+    <form id="messageForm" class="input-row">
+      <label class="icon-btn file-btn" title="Bild anhängen">
+        📎
+        <input id="imageInput" type="file" accept="image/*" hidden>
+      </label>
+      <input id="messageInput" type="text" placeholder="Nachricht schreiben…" autocomplete="off" disabled>
+      <button type="submit" id="sendBtn" disabled>Senden</button>
+    </form>
+
+    <div id="previewBar" class="preview-bar" style="display:none">
+      <img id="previewImg">
+      <span id="previewName" class="preview-name"></span>
+      <button id="previewCancel" class="icon-btn" type="button" title="Entfernen">✕</button>
+      <button id="sendImageBtn" type="button">Bild senden</button>
+    </div>
+  </main>
+
+</div>
+
+<!-- INCOMING CALL -->
+<div id="incomingPopup" class="modal-backdrop" style="display:none">
+  <div class="modal-card">
+    <div class="caller-avatar" id="popupAvatar"></div>
+    <p id="popupCaller" class="popup-caller"></p>
+    <p class="popup-sub">eingehender Anruf …</p>
+    <div class="modal-actions">
+      <button id="acceptCallBtn" class="btn accept">Annehmen</button>
+      <button id="declineCallBtn" class="btn decline">Ablehnen</button>
+    </div>
+  </div>
+</div>
+
+<!-- PROFILE -->
+<div id="profilePopup" class="modal-backdrop" style="display:none">
+  <div class="modal-card">
+    <div class="caller-avatar" id="profileAvatar"></div>
+    <p class="popup-caller" id="profileName"></p>
+    <p class="popup-sub" id="profileEmail"></p>
+    <div class="modal-actions">
+      <button id="profileCloseBtn" class="btn accept">Schließen</button>
+    </div>
+  </div>
+</div>
+
+<audio id="ringSound" src="phone-calling-1b.mp3" loop></audio>
+
+<script type="module" src="webchat.js"></script>
+</body>
+</html>
